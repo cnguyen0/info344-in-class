@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>info 344</title>
+    <!--<script type="type/javascript" src="index.js"></script>-->
+</head>
+<body>
+    <form>
+        <input type="text" id="fml" />
+        <button id="clicky">submit</button>
+    </form>
+    <p id='here'><p>
+
+</body>
+
+<script>
+    document.getElementById("clicky").addEventListener("click", function(event) {
+    event.preventDefault();
+
+    var name = document.getElementById('fml').value;
+    var putName = document.getElementById('here');
+    putName.innerHTML = "";
+    var query = 'http://192.168.99.100/zips/' + name;
+
+    var myInit = { method: 'GET' };
+
+    var newName = fetch(query, myInit).then(function(object) {
+        return object.json()
+    }).then(function (json) {
+        for (var i = 0; i < Object.keys(json).length; i++) {
+            console.log(json[i].Code);
+            putName.innerHTML += "<br />" + json[i].Code;
+        }
+    });
+})
+</script>
+</html>
