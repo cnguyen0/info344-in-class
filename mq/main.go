@@ -36,9 +36,9 @@ func main() {
 		log.Fatalf("error creating channel: %v", err)
 	}
 
-	q, err := channel.QueueDeclare("testQ", false, false, false, false, nil)
+	q, err := channel.QueueDeclare("messagingQ", false, false, false, false, nil)
 	msgs, err := channel.Consume(q.Name, "", true, false, false, false, nil)
-	go listen(msgs) // if you put go in front of hte func, it creates a new routine!
+	go listen(msgs) // if you put go in front of the func, it creates a new routine!
 
 	neverEnd := make(chan bool) // make a new channel
 	<-neverEnd                  // means i want to read a bool from this channel
